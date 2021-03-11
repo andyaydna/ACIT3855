@@ -4,6 +4,6 @@ datastore:
 scheduler:
   period_sec: 5
 eventstore_one:
-  url: http://localhost:8090/tracker/get_new_cases
+  url: http://acit3855lab6.eastus.cloudapp.azure.com:8090/tracker/get_new_cases
 eventstore_two:
-  url: http://localhost:8090/tracker/get_new_vaccinated
+  url: http://acit3855lab6.eastus.cloudapp.azure.com:8090/tracker/get_new_vaccinated
