@@ -1,0 +1,54 @@
+openapi: 3.0.0
+info:
+  description: This API provides event stats
+  version: "1.0.0"
+  title: Stats API
+  contact:
+    email: achow133@my.bcit.ca
+
+paths:
+  /stats:
+    get:
+      summary: Gets the event stats
+      operationId: app.get_stats
+      description: Gets new cases and newly vaccinated statistics
+      responses:
+        '200':
+          description: Successfully returned a list of cases events
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: '#/components/schemas/ReadingStats'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+components:
+  schemas:
+    ReadingStats:
+      required:
+      - num_new_cases_readings
+      - num_newly_vaccinated_readings
+      - longest_patient_name
+      - shortest_patient_name
+      properties:
+        num_new_cases_readings:
+          type: integer
+          example: 500000
+        num_newly_vaccinated_readings:
+          type: integer
+          example: 200
+        longest_patient_name:
+          type: string
+          example: 500000
+        shortest_patient_name:
+          type: string
+          example: 250
+      type: object

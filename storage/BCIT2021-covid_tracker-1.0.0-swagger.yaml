@@ -1,0 +1,173 @@
+openapi: 3.0.0
+info:
+  description: This API recieves and track covid data from hospitals
+  version: "1.0.0"
+  title: covid tracking API
+  contact:
+    email: achow133@my.bcit.ca
+tags:
+  - name: application
+    description: tracking options for covid app
+paths:
+#  /tracker/new_cases:
+#    post:
+#      tags:
+#        - application
+#      summary: reports new covid cases admitted into the hospital
+#      operationId: app.report_new_cases_admitted
+#      description: |
+#        Adds newly admitted covid patients to the system
+#      responses:
+#        '201':
+#          description: item created
+#        '400':
+#          description: 'invalid input, object invalid'
+#      requestBody:
+#        content:
+#          application/json:
+#            schema:
+#              $ref: '#/components/schemas/NewCasesAdmitted'
+#        description: New cases admitted number to add
+  #lab5 - start
+  /tracker/get_new_cases:
+     get:
+        tags:
+          - application
+        summary: gets new cases readings
+        operationId: app.get_new_cases
+        description: Gets new cases readings added after a timestamp
+        parameters:
+          - name: timestamp
+            in: query
+            description: Limits the number of items on a page
+            schema:
+              type: string
+              format: date-time
+              example: 2016-08-29T09:12:33.001Z
+        responses:
+          '200':
+            description: Successfully returned new cases events
+            content:
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/NewCasesAdmitted'
+          '400':
+            description: Invalid request
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+  #lab5 - end
+#  /tracker/new_vaccinated:
+#    post:
+#      tags:
+#        - application
+#      summary: reports number of people vaccinated in the hospital
+#      operationId: app.report_newly_vaccinated
+#      description: |
+#        Adds newly vaccinated patients to the system
+#      responses:
+#        '201':
+#          description: item created
+#        '400':
+#          description: 'invalid input, object invalid'
+#      requestBody:
+#        content:
+#          application/json:
+#            schema:
+#              $ref: '#/components/schemas/NewlyVaccinated'
+#        description: Newly vaccinated cases number to add
+  #lab5 - start
+  /tracker/get_new_vaccinated:
+     get:
+        tags:
+          - application
+        summary: gets new vaccination readings
+        operationId: app.get_newly_vaccinated
+        description: Gets vaccination results added after a timestamp
+        parameters:
+          - name: timestamp
+            in: query
+            description: Limits the number of items on a page
+            schema:
+              type: string
+              format: date-time
+              example: 2016-08-29T09:12:33.001Z
+        responses:
+          '200':
+            description: Successfully returned new vaccination events
+            content:
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/NewlyVaccinated'
+          '400':
+            description: Invalid request
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+  #lab5 - end
+components:
+  schemas:
+    NewCasesAdmitted:
+      required:
+        - patient_id
+        - patient_name
+        - case_id
+        - timestamp
+      properties:
+        patient_id:
+          type: string
+          format: uuid
+          example: d290f1ee-6c54-4b01-90e6-d701748f0851
+        patient_name:
+          type: string
+          example: John Doe
+        case_id:
+#          $ref: '#/components/schemas/NewCasesAdmitted'
+          type: number
+          example: 12345
+        timestamp:
+          type: string
+          format: date-time
+          example: '2016-08-29T09:12:33.001Z'
+      type: object
+      
+    NewlyVaccinated:
+      required:
+        - patient_id
+        - patient_name
+        - vaccination_id
+        - timestamp
+      properties:
+        patient_id:
+          type: string
+          format: uuid
+          example: d290f1ee-6c54-4b01-90e6-d701748f0851
+        patient_name:
+          type: string
+          example: John Doe
+        vaccination_id:
+#          $ref: '#/components/schemas/NewlyVaccinated'
+          type: number
+          example: 12345
+        timestamp:
+          type: string
+          format: date-time
+          example: '2016-08-29T09:12:33.001Z'
+      type: object
+      
+#servers:
+#  # Added by API Auto Mocking Plugin
+#  - description: SwaggerHub API Auto Mocking
+#    url: https://virtserver.swaggerhub.com/BCIT2021/covid_tracker/1.0.0

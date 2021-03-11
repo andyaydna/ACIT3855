@@ -1,0 +1,9 @@
+version: 1
+datastore:
+  filename: data.json
+scheduler:
+  period_sec: 5
+eventstore_one:
+  url: http://localhost:8090/tracker/get_new_cases
+eventstore_two:
+  url: http://localhost:8090/tracker/get_new_vaccinated
