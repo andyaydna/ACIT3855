@@ -1,0 +1,149 @@
+openapi: 3.0.0
+info:
+  description: This API recieves and track covid data from hospitals
+  version: "1.0.0"
+  title: covid tracking API
+  contact:
+    email: achow133@my.bcit.ca
+tags:
+  - name: application
+    description: tracking options for covid app
+paths:
+  #lab5 - start
+  /tracker/get_new_cases:
+     get:
+        tags:
+          - application
+        summary: gets new cases readings
+        operationId: app.get_new_cases
+        description: Gets new cases readings added after a timestamp
+        parameters:
+          - name: index
+            in: query
+            description: Limits the number of items on a page
+            schema:
+              type: integer
+              example: 100
+        responses:
+          '200':
+            description: Successfully returned new cases events
+            content:
+              application/json:
+                schema:
+                  type: object
+                  items:
+                    $ref: '#/components/schemas/NewCasesAdmitted'
+          '400':
+            description: Invalid request
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+          '404':
+            description: Invalid request
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+  /tracker/get_new_vaccinated:
+     get:
+        tags:
+          - application
+        summary: gets new vaccination readings
+        operationId: app.get_newly_vaccinated
+        description: Gets vaccination results added after a timestamp
+        parameters:
+          - name: index
+            in: query
+            description: Limits the number of items on a page
+            schema:
+              type: integer
+              example: 200
+        responses:
+          '200':
+            description: Successfully returned new vaccination events
+            content:
+              application/json:
+                schema:
+                  type: object
+                  items:
+                    $ref: '#/components/schemas/NewlyVaccinated'
+          '400':
+            description: Invalid request
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+          '404':
+            description: Invalid request
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+  #lab5 - end
+components:
+  schemas:
+    NewCasesAdmitted:
+      required:
+        - patient_id
+        - patient_name
+        - case_id
+        - timestamp
+      properties:
+        patient_id:
+          type: string
+          format: uuid
+          example: d290f1ee-6c54-4b01-90e6-d701748f0851
+        patient_name:
+          type: string
+          example: John Doe
+        case_id:
+#          $ref: '#/components/schemas/NewCasesAdmitted'
+          type: number
+          example: 12345
+        timestamp:
+          type: string
+          format: date-time
+          example: '2016-08-29T09:12:33.001Z'
+      type: object
+
+    NewlyVaccinated:
+      required:
+        - patient_id
+        - patient_name
+        - vaccination_id
+        - timestamp
+      properties:
+        patient_id:
+          type: string
+          format: uuid
+          example: d290f1ee-6c54-4b01-90e6-d701748f0851
+        patient_name:
+          type: string
+          example: John Doe
+        vaccination_id:
+#          $ref: '#/components/schemas/NewlyVaccinated'
+          type: number
+          example: 12345
+        timestamp:
+          type: string
+          format: date-time
+          example: '2016-08-29T09:12:33.001Z'
+      type: object
+
+#servers:
+#  # Added by API Auto Mocking Plugin
+#  - description: SwaggerHub API Auto Mocking
+#    url: https://virtserver.swaggerhub.com/BCIT2021/covid_tracker/1.0.0
