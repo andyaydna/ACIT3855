@@ -1,5 +1,5 @@
 import connexion
-import mysql.connector
+#import mysql.connector
 from connexion import NoContent
 
 from sqlalchemy import create_engine
