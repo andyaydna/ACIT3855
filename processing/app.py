@@ -3,8 +3,8 @@ import connexion
 from apscheduler.schedulers.background import BackgroundScheduler
 from connexion import NoContent
 
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
+#from sqlalchemy import create_engine
+#from sqlalchemy.orm import sessionmaker
 # from base import Base
 # from new_cases import NewCases
 # from newly_vaccinated import NewlyVaccinated
