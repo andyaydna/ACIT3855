@@ -1,5 +1,5 @@
 import connexion
-import mysql.connector
+#import mysql.connector
 from apscheduler.schedulers.background import BackgroundScheduler
 from connexion import NoContent
 
