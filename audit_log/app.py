@@ -2,8 +2,8 @@ import connexion
 #import mysql.connector
 from connexion import NoContent
 
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
+#from sqlalchemy import create_engine
+#from sqlalchemy.orm import sessionmaker
 # from new_cases import NewCases
 # from newly_vaccinated import NewlyVaccinated
 import datetime
@@ -24,7 +24,7 @@ with open('log_conf.yml', 'r') as f:
 
 logger = logging.getLogger('basicLogger')
 
-DB_ENGINE = create_engine('mysql+pymysql://' + app_config['datastore']['user'] + ':' + app_config['datastore']['password'] + '@' +app_config['datastore']['hostname'] + ':' + str(app_config['datastore']['port']) + '/' + app_config['datastore']['db'])
+#DB_ENGINE = create_engine('mysql+pymysql://' + app_config['datastore']['user'] + ':' + app_config['datastore']['password'] + '@' +app_config['datastore']['hostname'] + ':' + str(app_config['datastore']['port']) + '/' + app_config['datastore']['db'])
 
 # Base.metadata.bind = DB_ENGINE
 # DB_SESSION = sessionmaker(bind=DB_ENGINE)
