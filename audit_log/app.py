@@ -14,6 +14,8 @@ import json
 from pykafka import KafkaClient
 from pykafka.common import OffsetType
 
+from flask_cors import CORS, cross_origin
+
 # DB_ENGINE = create_engine("sqlite:///readings.sqlite")
 with open('app_conf.yml', 'r') as f:
     app_config = yaml.safe_load(f.read())
