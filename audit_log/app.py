@@ -14,6 +14,7 @@ import json
 from pykafka import KafkaClient
 from pykafka.common import OffsetType
 
+# lab9
 from flask_cors import CORS, cross_origin
 
 # DB_ENGINE = create_engine("sqlite:///readings.sqlite")
@@ -92,6 +93,7 @@ def get_newly_vaccinated(index):
     return {"message": "Not Found"}, 404
 
 app = connexion.FlaskApp(__name__, specification_dir='')
+# lab9
 CORS(app.app)
 app.app.config['CORS_HEADERS'] = 'Content-Type'
 app.add_api("BCIT2021-covid_tracker-1.0.0-swagger.yaml",
