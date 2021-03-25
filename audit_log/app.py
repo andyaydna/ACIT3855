@@ -92,6 +92,8 @@ def get_newly_vaccinated(index):
     return {"message": "Not Found"}, 404
 
 app = connexion.FlaskApp(__name__, specification_dir='')
+CORS(app.app)
+app.app.config['CORS_HEADERS'] = 'Content-Type'
 app.add_api("BCIT2021-covid_tracker-1.0.0-swagger.yaml",
             strict_validation=True,
             validate_responses=True)
