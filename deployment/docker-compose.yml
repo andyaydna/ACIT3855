@@ -47,7 +47,7 @@ services:
     image: dashboard
     port:
       - "3000:3000"
-    depeonds_on:
+    depends_on:
       - "processing"
       - "audit_log"
 # Names our volume
