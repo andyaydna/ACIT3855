@@ -7,7 +7,7 @@ import AppStats from './components/AppStats'
 function App() {
 
     // lab 9
-    const endpoints = ["get_new_cases", "get_new_vaccinated"]
+    const endpoints = ["tracker/get_new_cases", "tracker/get_new_vaccinated"]
 
     const rendered_endpoints = endpoints.map((endpoint) => {
         return <EndpointAudit key={endpoint} endpoint={endpoint}/>

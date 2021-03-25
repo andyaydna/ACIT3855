@@ -3,6 +3,9 @@ import connexion
 from apscheduler.schedulers.background import BackgroundScheduler
 from connexion import NoContent
 
+# lab9
+from flask_cors import CORS, cross_origin
+
 #from sqlalchemy import create_engine
 #from sqlalchemy.orm import sessionmaker
 # from base import Base
@@ -206,6 +209,9 @@ def init_scheduler():
 """lab5-end"""
 
 app = connexion.FlaskApp(__name__, specification_dir='')
+# lab9
+CORS(app.app)
+app.app.config['CORS_HEADERS'] = 'Content-Type'
 app.add_api("BCIT2021-covid_tracker-1.0.0-swagger.yaml",
             strict_validation=True,
             validate_responses=True)

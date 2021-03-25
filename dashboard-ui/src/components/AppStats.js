@@ -40,21 +40,18 @@ export default function AppStats() {
 							<th>Newly Vaccinated</th>
 						</tr>
 						<tr>
-							<td># New Cases: {stats['num_bp_readings']}</td>
-							<td># Newly Vaccinated: {stats['num_hr_readings']}</td>
+							<td># New Cases: {stats['num_new_cases_readings']}</td>
+							<td># Newly Vaccinated: {stats['num_newly_vaccinated_readings']}</td>
 						</tr>
 						<tr>
-							<td colspan="2">Max BP Systolic: {stats['max_bp_sys_reading']}</td>
+							<td colspan="2">Longest Patient Name: {stats['longest_patient_name']}</td>
 						</tr>
 						<tr>
-							<td colspan="2">Max BR Diastolic: {stats['max_bp_dia_reading']}</td>
-						</tr>
-						<tr>
-							<td colspan="2">Max HR: {stats['max_bp_sys_reading']}</td>
+							<td colspan="2">Shortest Patient Name: {stats['shortest_patient_name']}</td>
 						</tr>
 					</tbody>
                 </table>
-                <h3>Last Updated: {stats['last_updated']}</h3>
+                <h3>Last Updated: {stats['last_Updated']}</h3>
 
             </div>
         )
