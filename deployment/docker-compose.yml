@@ -43,6 +43,13 @@ services:
       # Where our data will be persisted
     volumes:
       - my-db:/var/lib/mysql
+  dashboard:
+    image: dashboard
+    port:
+      - "3000:3000"
+    depeonds_on:
+      - "processing"
+      - "audit_log"
 # Names our volume
 volumes:
   my-db:
