@@ -122,39 +122,54 @@ logger.info("Log Conf File: %s" % log_conf_file)
 """lab5-start"""
 def get_stats():
     """Get the current datetime"""
-    now = str(datetime.datetime.now())
-    now = now.replace(' ', 'T')
-    now = now[:-7] + "Z"
+    # now = str(datetime.datetime.now())
+    # now = now.replace(' ', 'T')
+    # now = now[:-7] + "Z"
+    path = app_config['datastore']['filename']
+    # isFile = os.path.isfile(path)
     "Log an INFO message indicating request has started"
     logger.info("request has started")
     "Read in the current statistics from the JSON file (defined in your configuration)"
     try:
         with open(app_config['datastore']['filename'], 'r') as f:
             data = json.load(f)
-    except FileNotFoundError:
+        "Log a DEBUG message with the contents of the Python Dictionary"
+        logger.debug(data)
+        "Log an INFO message indicating request has completed"
+        logger.info("request has completed")
+        "Return the Python dictionary as the context and 200 as the response code"
+        return data, 200
+    except:
+        # processing_dict = {}
+        # processing_dict["num_new_cases_readings"] = 0
+        # processing_dict["num_newly_vaccinated_readings"] = 0
+        # processing_dict["longest_patient_name"] = "John Doe"
+        # processing_dict["shortest_patient_name"] = "Andy"
+        # processing_dict["last_Updated"] = now
+        string = "Statistics does not exist"
+        logger.info(string)
+
+def populate_stats():
+    now = str(datetime.datetime.now())
+    now = now.replace(' ', 'T')
+    now = now[:-7] + "Z"
+    isFile = os.path.isfile(path)
+    """Log an INFO message indicating periodic processing has started"""
+    logger.info('Start Periodic Processing')
+
+    """Read in the current statistics from the JSON file (filename defined in your configuration)"""
+    if isFile:
+        with open(app_config['datastore']['filename'], 'r') as f:
+            data = json.load(f)
+            print(data)
+    else:
         processing_dict = {}
         processing_dict["num_new_cases_readings"] = 0
         processing_dict["num_newly_vaccinated_readings"] = 0
         processing_dict["longest_patient_name"] = "John Doe"
         processing_dict["shortest_patient_name"] = "Andy"
         processing_dict["last_Updated"] = now
-        string = "Statistics does not exist"
-        return string, 404
-    "Log a DEBUG message with the contents of the Python Dictionary"
-    logger.debug(data)
-    "Log an INFO message indicating request has completed"
-    logger.info("request has completed")
-    "Return the Python dictionary as the context and 200 as the response code"
-    return data, 200
-
-def populate_stats():
-    """Log an INFO message indicating periodic processing has started"""
-    logger.info('Start Periodic Processing')
-
-    """Read in the current statistics from the JSON file (filename defined in your configuration)"""
-    with open(app_config['datastore']['filename'], 'r') as f:
-        data = json.load(f)
-        print(data)
+        data = processing_dict
 
     "Query the two GET endpoints from your Data Store Service (using requests.get) to get all new events from the last datetime you requested them (from your statistics) to the current datetime"
     endpoint_one = app_config['eventstore_one']['url']
@@ -208,7 +223,7 @@ def populate_stats():
     for x in status_code_two_json:
         num_newly_vaccinated_readings += 1
 
-    data = {}
+    # data = {}
     data["num_new_cases_readings"] = num_new_cases_readings
     data["num_newly_vaccinated_readings"] = num_newly_vaccinated_readings
     data["longest_patient_name"] = longest_patient_name
