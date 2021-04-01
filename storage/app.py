@@ -52,8 +52,8 @@ logger = logging.getLogger('basicLogger')
 logger.info("App Conf File: %s" % app_conf_file)
 logger.info("Log Conf File: %s" % log_conf_file)
 
-Base.metadata.bind = DB_ENGINE
-DB_SESSION = sessionmaker(bind=DB_ENGINE)
+# Base.metadata.bind = DB_ENGINE
+# DB_SESSION = sessionmaker(bind=DB_ENGINE)
 
 MAX_EVENTS = 10
 EVENT_FILE = "events.json"
