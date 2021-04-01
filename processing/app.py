@@ -153,6 +153,7 @@ def populate_stats():
     now = str(datetime.datetime.now())
     now = now.replace(' ', 'T')
     now = now[:-7] + "Z"
+    path = app_config['datastore']['filename']
     isFile = os.path.isfile(path)
     """Log an INFO message indicating periodic processing has started"""
     logger.info('Start Periodic Processing')
