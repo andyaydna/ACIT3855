@@ -125,7 +125,7 @@ def get_stats():
     logger.info("request has started")
     "Read in the current statistics from the JSON file (defined in your configuration)"
     try:
-        with open('data.json', 'r') as f:
+        with open(app_config['datastore']['filename'], 'r') as f:
             data = json.load(f)
     except FileNotFoundError:
         string = "Statistics does not exist"
@@ -142,7 +142,7 @@ def populate_stats():
     logger.info('Start Periodic Processing')
 
     """Read in the current statistics from the JSON file (filename defined in your configuration)"""
-    with open('data.json', 'r') as f:
+    with open(app_config['datastore']['filename'], 'r') as f:
         data = json.load(f)
         print(data)
 
@@ -184,7 +184,7 @@ def populate_stats():
         logger.info("received: %d" % len(status_code_two_json))
 
     "Based on the new events from the Data Store Service:"
-    with open('data.json', 'r') as f:
+    with open(app_config['datastore']['filename'], 'r') as f:
         data = json.load(f)
 
     num_new_cases_readings = data["num_new_cases_readings"]
@@ -211,7 +211,7 @@ def populate_stats():
 
     data["last_Updated"] = now
 
-    with open('data.json', 'w') as f:
+    with open(app_config['datastore']['filename'], 'w') as f:
         json.dump(data, f)
 
     logger.debug(data)
