@@ -121,6 +121,10 @@ logger.info("Log Conf File: %s" % log_conf_file)
 
 """lab5-start"""
 def get_stats():
+    """Get the current datetime"""
+    now = str(datetime.datetime.now())
+    now = now.replace(' ', 'T')
+    now = now[:-7] + "Z"
     "Log an INFO message indicating request has started"
     logger.info("request has started")
     "Read in the current statistics from the JSON file (defined in your configuration)"
@@ -128,6 +132,12 @@ def get_stats():
         with open(app_config['datastore']['filename'], 'r') as f:
             data = json.load(f)
     except FileNotFoundError:
+        processing_dict = {}
+        processing_dict["num_new_cases_readings"] = 0
+        processing_dict["num_newly_vaccinated_readings"] = 0
+        processing_dict["longest_patient_name"] = "John Doe"
+        processing_dict["shortest_patient_name"] = "Andy"
+        processing_dict["last_Updated"] = now
         string = "Statistics does not exist"
         return string, 404
     "Log a DEBUG message with the contents of the Python Dictionary"
@@ -145,11 +155,6 @@ def populate_stats():
     with open(app_config['datastore']['filename'], 'r') as f:
         data = json.load(f)
         print(data)
-
-    """Get the current datetime"""
-    now = str(datetime.datetime.now())
-    now = now.replace(' ', 'T')
-    now = now[:-7] + "Z"
 
     "Query the two GET endpoints from your Data Store Service (using requests.get) to get all new events from the last datetime you requested them (from your statistics) to the current datetime"
     endpoint_one = app_config['eventstore_one']['url']
