@@ -174,7 +174,7 @@ def populate_stats():
 
     "Query the two GET endpoints from your Data Store Service (using requests.get) to get all new events from the last datetime you requested them (from your statistics) to the current datetime"
     endpoint_one = app_config['eventstore_one']['url']
-    endpoint_one = endpoint_one + "?timestamp=" + str(now)
+    endpoint_one = endpoint_one + "?timestamp=" + str(now) + "&end_timestamp" + now #lab11
     print(endpoint_one)
 
     status_code_one = requests.get(endpoint_one)
@@ -190,7 +190,7 @@ def populate_stats():
         logger.info("received: %d" % len(status_code_one_json))
 
     endpoint_two = app_config['eventstore_two']['url']
-    endpoint_two = endpoint_two + "?timestamp=" + str(now)
+    endpoint_two = endpoint_two + "?timestamp=" + str(now) + "&end_timestamp" + now #lab11
 
     status_code_two = requests.get(endpoint_two)
     print(endpoint_two)

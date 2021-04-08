@@ -4,6 +4,7 @@ from connexion import NoContent
 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
+from sqlalchemy import and_ #lab11
 from base import Base
 from new_cases import NewCases
 from newly_vaccinated import NewlyVaccinated
@@ -76,11 +77,14 @@ def report_new_cases_admitted(body):
     return NoContent, 201
 
 """lab5-start"""
-def get_new_cases(timestamp):
+def get_new_cases(timestamp, end_timestamp): # lab11
     session = DB_SESSION()
     timestamp_datetime = datetime.datetime.strptime(timestamp, "%Y-%m-%dT%H:%M:%SZ")
+    end_timestamp_datetime = datetime.datetime.strptime(end_timestamp, "%Y-%m-%dT%H:%M:%S") # lab11
     print(timestamp_datetime)
-    readings = session.query(NewCases).filter(NewCases.date_created >= timestamp_datetime)
+    readings = session.query(NewCases).filter( # lab11
+        and_(NewCases.date_created >= timestamp_datetime,
+            NewCases.date_created < end_timestamp_datetime))
     results_list = []
     for reading in readings:
         results_list.append(reading.to_dict())
@@ -105,11 +109,14 @@ def report_newly_vaccinated(body):
     return NoContent, 201
 
 """lab5-start"""
-def get_newly_vaccinated(timestamp):
+def get_newly_vaccinated(timestamp, end_timestamp): # lab11
     session = DB_SESSION()
     timestamp_datetime = datetime.datetime.strptime(timestamp, "%Y-%m-%dT%H:%M:%SZ")
+    end_timestamp_datetime = datetime.datetime.strptime(end_timestamp, "%Y-%m-%dT%H:%M:%S") # lab11
     print(timestamp_datetime)
-    readings = session.query(NewlyVaccinated).filter(NewlyVaccinated.date_created >= timestamp_datetime)
+    readings = session.query(NewlyVaccinated).filter( # lab11
+        and_(NewlyVaccinated.date_created >= timestamp_datetime,
+            NewlyVaccinated.date_created < end_timestamp_datetime))
     results_list = []
     for reading in readings:
         results_list.append(reading.to_dict())

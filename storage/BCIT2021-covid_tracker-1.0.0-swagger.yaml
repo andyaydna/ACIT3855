@@ -125,6 +125,7 @@ components:
         - patient_name
         - case_id
         - timestamp
+        - end_timestamp #lab11
       properties:
         patient_id:
           type: string
@@ -141,6 +142,10 @@ components:
           type: string
           format: date-time
           example: '2016-08-29T09:12:33.001Z'
+        end_timestamp: #lab11
+          type: string
+          format: date-time
+          example: '2016-08-29T09:12:33.001Z'
       type: object
       
     NewlyVaccinated:
@@ -149,6 +154,7 @@ components:
         - patient_name
         - vaccination_id
         - timestamp
+        - end_timestamp #lab11
       properties:
         patient_id:
           type: string
@@ -165,6 +171,10 @@ components:
           type: string
           format: date-time
           example: '2016-08-29T09:12:33.001Z'
+        end_timestamp: #lab11
+          type: string
+          format: date-time
+          example: '2016-08-29T09:12:33.001Z'          
       type: object
       
 #servers:
